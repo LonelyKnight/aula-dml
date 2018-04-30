@@ -13,7 +13,11 @@ public class Bank extends Bank_Base {
 
 	public void delete() {
 		setRoot(null);
-
+		
+		for (Account account : getAccountSet()) {
+			account.delete();
+		}
+		
 		deleteDomainObject();
 	}
 
@@ -21,6 +25,14 @@ public class Bank extends Bank_Base {
 		for (Bank bank : FenixFramework.getDomainRoot().getBankSet()) {
 			if (bank.getCode().equals(code)) {
 				return bank;
+			}
+		}
+		return null;
+	}
+	public Account getAccount(String code) {
+		for (Account account : getAccountSet()) {
+			if (account.getCode().equals(code)) {
+				return account;
 			}
 		}
 		return null;
